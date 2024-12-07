@@ -109,13 +109,14 @@ func login(p *agouti.Page) error {
 	if err != nil {
 		return err
 	}
-	email := p.FindByID("email")
-	pass := p.FindByID("password")
+
+	email := p.FindByXPath("/html/body/main/div/div/div/div[2]/div[1]/form/div[1]/div[1]/div[2]/input")
+	pass := p.FindByXPath("/html/body/main/div/div/div/div[2]/div[1]/form/div[1]/div[2]/div[2]/input")
 
 	email.Fill(config.User.Email)
 	pass.Fill(config.User.Pass)
 
-	if err := p.FirstByClass("a-button-primary-large").Submit(); err != nil {
+	if err := p.FirstByClass("s-cv-button").Submit(); err != nil {
 		return err
 	}
 
